@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sleep_tracker/achievements_screen.dart';
@@ -5,6 +7,7 @@ import 'package:sleep_tracker/history_screen.dart';
 import 'package:sleep_tracker/settings_screen.dart';
 import 'package:sleep_tracker/sleep_session_provider.dart';
 import 'nothern_lights.dart';
+import 'session_summary_screen.dart';
 
 
 class ButtonHoverNotifier extends StateNotifier<bool> {
@@ -121,6 +124,12 @@ class HomePageContent extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Sleep session started!')),
       );
+      Timer(sleepSession.getRemainingTime(), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SessionSummaryScreen()),
+      );
+    });
     }
   }
 
