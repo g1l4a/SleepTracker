@@ -3,12 +3,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Settings {
+  final bool isDarkMode;
   final bool vibrationEnabled;
   final bool soundEnabled;
   final String language;
   final bool notificationsEnabled;
 
   Settings({
+    this.isDarkMode = true,
     this.vibrationEnabled = false,
     this.soundEnabled = true,
     this.language = 'eng',
@@ -16,12 +18,14 @@ class Settings {
   });
 
   Settings copyWith({
+    bool? isDarkMode,
     bool? vibrationEnabled,
     bool? soundEnabled,
     String? language,
     bool? notificationsEnabled,
   }) {
     return Settings(
+      isDarkMode: isDarkMode ?? this.isDarkMode,
       vibrationEnabled: vibrationEnabled ?? this.vibrationEnabled,
       soundEnabled: soundEnabled ?? this.soundEnabled,
       language: language ?? this.language,
@@ -33,6 +37,11 @@ class Settings {
 class SettingsNotifier extends StateNotifier<Settings> {
   SettingsNotifier() : super(Settings()) {
     loadSettings();
+  }
+
+  void toggleTheme(bool isDarkMode) {
+    state = state.copyWith(isDarkMode: isDarkMode);
+    saveSettings();
   }
 
   void toggleVibration(bool isEnabled) {
@@ -57,6 +66,7 @@ class SettingsNotifier extends StateNotifier<Settings> {
 
   Future<void> saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', state.isDarkMode);
     await prefs.setBool('vibrationEnabled', state.vibrationEnabled);
     await prefs.setBool('soundEnabled', state.soundEnabled);
     await prefs.setString('language', state.language);
@@ -66,6 +76,7 @@ class SettingsNotifier extends StateNotifier<Settings> {
   Future<void> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
     state = state.copyWith(
+      isDarkMode: prefs.getBool('isDarkMode') ?? false,
       vibrationEnabled: prefs.getBool('vibrationEnabled') ?? false,
       soundEnabled: prefs.getBool('soundEnabled') ?? true,
       language: prefs.getString('language') ?? 'eng',

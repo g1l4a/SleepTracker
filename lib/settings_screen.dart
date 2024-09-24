@@ -46,6 +46,11 @@ class SettingsScreen extends ConsumerWidget {
                   value: settings.notificationsEnabled,
                   onChanged: notifier.toggleNotifications,
                 ),
+                SwitchListTile(
+                  title: const Text('Enable Dark Mode', style: TextStyle(color: Colors.white)),
+                  value: settings.isDarkMode,
+                  onChanged: notifier.toggleTheme,
+                ),
                 const SizedBox(height: 20),
                 const Text(
                   'Language',
