@@ -9,7 +9,7 @@ void main() {
 }
 
 class ProjectApp extends StatelessWidget {
-  const ProjectApp({super.key});
+  const ProjectApp({super.key});  
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ProjectApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LogoScreen(),
+      home: const LogoScreen(),
     );
   }
 }

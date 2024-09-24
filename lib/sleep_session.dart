@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SleepSession {
   TimeOfDay? startTime;
@@ -10,6 +12,7 @@ class SleepSession {
   bool vibrationEnabled;
   bool soundEnabled;
   bool isSessionActive;
+  Timer? _timer;
 
   SleepSession({
     this.startTime,
@@ -49,7 +52,8 @@ class SleepSession {
       return;
     }
 
-    await _scheduleAlarm(flutterLocalNotificationsPlugin);
+    //await _scheduleAlarm(flutterLocalNotificationsPlugin); remove // when test on android
+    await _saveToPreferences();
   }
 
   Future<void> _scheduleAlarm(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
@@ -64,7 +68,7 @@ class SleepSession {
       importance: Importance.high,
       priority: Priority.high,
       vibrationPattern: vibrationEnabled ? Int64List.fromList([0, 1000, 500, 1000]) : null,
-      sound: soundEnabled ? RawResourceAndroidNotificationSound('alarm') : null,
+      sound: soundEnabled ? const RawResourceAndroidNotificationSound('alarm') : null,
     );
     
     var platformDetails = NotificationDetails(android: androidDetails);
@@ -91,7 +95,6 @@ class SleepSession {
     return DateFormat('hh:mm a').format(dt);
   }
 
-  // New method to calculate remaining time in minutes
   Duration getRemainingTime() {
     if (startTime == null || endTime == null) {
       return Duration.zero;
@@ -101,11 +104,48 @@ class SleepSession {
     final nowInMinutes = now.hour * 60 + now.minute;
     final endInMinutes = endTime!.hour * 60 + endTime!.minute;
 
-    // If the current time is past the end time, return zero
     if (nowInMinutes >= endInMinutes) {
       return Duration.zero;
     }
 
     return Duration(minutes: endInMinutes - nowInMinutes);
+  }
+
+  void startTimer(Function onUpdate) {
+    _timer = Timer.periodic(Duration(seconds: 1), (_) {
+      onUpdate();
+    });
+  }
+
+  void stopTimer() {
+    _timer?.cancel();
+    _timer = null;
+  }
+  
+  Future<void> _saveToPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('startTime', startTime != null ? '${startTime!.hour}:${startTime!.minute}' : '');
+    await prefs.setString('endTime', endTime != null ? '${endTime!.hour}:${endTime!.minute}' : '');
+    await prefs.setBool('vibrationEnabled', vibrationEnabled);
+    await prefs.setBool('soundEnabled', soundEnabled);
+    await prefs.setBool('isSessionActive', isSessionActive);
+  }
+
+
+  Future<void> loadFromPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    final startTimeString = prefs.getString('startTime');
+    if (startTimeString != null) {
+      final timeParts = startTimeString.split(':');
+      startTime = TimeOfDay(hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1]));
+    }
+    final endTimeString = prefs.getString('endTime');
+    if (endTimeString != null) {
+      final timeParts = endTimeString.split(':');
+      endTime = TimeOfDay(hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1]));
+    }
+    vibrationEnabled = prefs.getBool('vibrationEnabled') ?? false;
+    soundEnabled = prefs.getBool('soundEnabled') ?? true;
+    isSessionActive = prefs.getBool('isSessionActive') ?? false;
   }
 }
