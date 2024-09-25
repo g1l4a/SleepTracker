@@ -84,10 +84,10 @@ class AchievementsScreen extends ConsumerWidget {
                 )
               ),
               
-                          // TODO: remove
+                          /*
                           TextButton(onPressed: () => {
                             ref.read(achievementsProvider.notifier).complete(0)
-                          }, child: const Text('TEST BUTTON: obtain achievement')),
+                          }, child: const Text('TEST BUTTON: obtain achievement')),*/
 
               // const Divider(height: 4, color: Colors.blueGrey),
               Expanded(
