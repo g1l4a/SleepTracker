@@ -10,7 +10,7 @@ void main() {
       SharedPreferences.setMockInitialValues({});
     });
 
-    test('saveSessionSummary saves data correctly', () async {
+    test('saveSessionSummary saves data', () async {
       await SessionSummarySharedPreferences.saveSessionSummary(Duration(hours: 2), 4);
 
       final prefs = await SharedPreferences.getInstance();
