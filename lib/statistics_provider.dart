@@ -51,8 +51,15 @@ class StatisticsNotifier extends StateNotifier<Statistics> {
       lastEndTimeDT = null;
     }
 
+    int curConsDays = prefs.getInt(statsCurConsDaysKey) ?? 0;
+    if(lastEndTimeDT != null) {
+      if(DateTime.now().difference(lastEndTimeDT).abs() > const Duration(hours: 20)) {
+        curConsDays = 0;
+      }
+    }
+
     state = Statistics(
-      curConsDays: prefs.getInt(statsCurConsDaysKey) ?? 0,
+      curConsDays: curConsDays,
       maxConsDays: prefs.getInt(statsMaxConsDaysKey) ?? 0,
       total: prefs.getInt(statsTotalKey) ?? 0,
       lastSessionEnd: lastEndTimeDT
