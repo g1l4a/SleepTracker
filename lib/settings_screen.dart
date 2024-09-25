@@ -80,6 +80,39 @@ class SettingsScreen extends ConsumerWidget {
                     },
                   ),
                 ),
+              TextButton(
+                child: Text('Reset data', style: TextStyle(
+                    color: Colors.grey.shade200,
+                    fontSize: 24,
+                    fontFamily: 'Montserrat'
+                    ).copyWith(fontSize: 16, color: Colors.grey)),
+                onPressed: () async {
+                  bool? confirmed = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Wait a second!"),
+                        content: const Text("Are you sure you want to reset achievements and statistics?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () { Navigator.of(context).pop(false); },
+                            child: const Text("Cancel"),
+                          ),
+                          TextButton(
+                            onPressed: () { Navigator.of(context).pop(true); },
+                            child: const Text("Confirm"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  
+                  if (confirmed == true) {
+                    ref.read(achievementsProvider.notifier).reset();
+                    ref.read(statisticsProvider.notifier).reset();
+                  }
+                },
+              ),
               ],
             ),
           ),
