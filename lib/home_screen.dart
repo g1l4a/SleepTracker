@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sleep_tracker/achievements_screen.dart';
@@ -142,6 +141,7 @@ class HomePageContent extends ConsumerWidget {
     children: [
       Padding(
         padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -307,6 +307,7 @@ class HomePageContent extends ConsumerWidget {
           ],
         ),
       ),
+      )
     ],
   );
  }
