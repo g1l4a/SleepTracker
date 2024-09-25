@@ -60,10 +60,12 @@ class AchievementsScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
+                    // AppLocalizations.of(context)!.achievementScreenTitle
                     const Text('Achievements', textAlign: TextAlign.center, style: headerStyle),
                     const SizedBox(height: 16),
                     Row(
                       children: [
+                         // AppLocalizations.of(context)!.statisticsCurConsDays
                         Text('Current consecutive days tracked', softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.curConsDays}', softWrap: true, style: normalStyleGlow),
@@ -71,6 +73,7 @@ class AchievementsScreen extends ConsumerWidget {
                     ),
                     Row(
                       children: [
+                        // AppLocalizations.of(context)!.statisticsMaxConsDays
                         Text('Maximum consecutive days tracked', softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.maxConsDays}', softWrap: true, style: normalStyleGlow),
@@ -78,6 +81,7 @@ class AchievementsScreen extends ConsumerWidget {
                     ),
                     Row(
                       children: [
+                        // AppLocalizations.of(context)!.statisticsTotalDays
                         Text('Total days tracked', softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.total}', softWrap: true, style: normalStyleGlow),
@@ -87,7 +91,6 @@ class AchievementsScreen extends ConsumerWidget {
                 )
               ),
 
-              // const Divider(height: 4, color: Colors.blueGrey),
               Expanded(
                 child: ListView(
                   scrollDirection: Axis.vertical,
@@ -115,6 +118,7 @@ class AchievementsScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                // AppLocalizations.of(context)!.achievementNames(s.id)
                                 s.name,
                                 softWrap: true,
                                 style: TextStyle(
@@ -124,8 +128,9 @@ class AchievementsScreen extends ConsumerWidget {
                                 )
                               ),
                               Text(
-                                softWrap: true,
+                                // AppLocalizations.of(context)!.achievementDescriptions(s.id)
                                 s.description,
+                                softWrap: true,
                                 style: TextStyle(
                                   color: s.isObtained? Colors.grey.shade400 : Colors.blueGrey,
                                   fontSize: 18,
@@ -141,22 +146,27 @@ class AchievementsScreen extends ConsumerWidget {
                 )
               ),
 
-              TextButton(
+              /*TextButton(
+                // AppLocalizations.of(context)!.btDataReset
                 child: Text('Reset data', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
                 onPressed: () async {
                   bool? confirmed = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
+                        // AppLocalizations.of(context)!.dataResetTitle
                         title: const Text("Wait a second!"),
+                        // AppLocalizations.of(context)!.dataResetText
                         content: const Text("Are you sure you want to reset achievements and statistics?"),
                         actions: [
                           TextButton(
                             onPressed: () { Navigator.of(context).pop(false); },
+                            // AppLocalizations.of(context)!.btCancel
                             child: const Text("Cancel"),
                           ),
                           TextButton(
                             onPressed: () { Navigator.of(context).pop(true); },
+                            // AppLocalizations.of(context)!.btConfirm
                             child: const Text("Confirm"),
                           ),
                         ],
@@ -169,7 +179,7 @@ class AchievementsScreen extends ConsumerWidget {
                     ref.read(statisticsProvider.notifier).reset();
                   }
                 },
-              ),
+              ),*/
             ],
           ),
         ],

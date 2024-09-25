@@ -23,4 +23,5 @@
   "dataResetText": "Are you sure you want to reset achievements and statistics?",
   "btCancel": "Cancel",
   "btConfirm": "Confirm",
+  "btDataReset": "ResetData",
 }
