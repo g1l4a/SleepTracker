@@ -31,6 +31,11 @@ class SettingsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 20),
+                const Text(
+                  'Preferences',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
                 SwitchListTile(
                   title: const Text('Enable Vibration', style: TextStyle(color: Colors.white)),
                   value: settings.vibrationEnabled,
