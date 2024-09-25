@@ -20,7 +20,22 @@ class AchievementsScreen extends ConsumerWidget {
         Shadow(
           blurRadius: 5.0,
           color: Colors.white,
-          offset: Offset(0, 2),
+        ),
+      ],
+    );
+    final normalStyle = TextStyle(
+      color: Colors.grey.shade200,
+      fontSize: 24,
+      fontFamily: 'Montserrat'
+    );
+    final normalStyleGlow = TextStyle(
+      color: Colors.grey.shade200,
+      fontSize: 24,
+      fontFamily: 'Montserrat',
+      shadows: [
+        Shadow(
+          blurRadius: 5.0,
+          color: Colors.grey.shade200,
         ),
       ],
     );
@@ -38,15 +53,43 @@ class AchievementsScreen extends ConsumerWidget {
             children: [
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.all(16),
-                child: const Text('Achievements', textAlign: TextAlign.center, style: headerStyle)
+                padding: const EdgeInsets.only  (left: 8, right: 8),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    const Text('Achievements', textAlign: TextAlign.center, style: headerStyle),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text('Current consecutive days tracked', softWrap: true, style: normalStyle),
+                        const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
+                        Text('0', softWrap: true, style: normalStyleGlow),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('Maximum consecutive days tracked', softWrap: true, style: normalStyle),
+                        const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
+                        Text('0', softWrap: true, style: normalStyleGlow),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text('Total days tracked', softWrap: true, style: normalStyle),
+                        const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
+                        Text('0', softWrap: true, style: normalStyleGlow),
+                      ],
+                    ),
+                  ]
+                )
               ),
+              
+                          // TODO: remove
                           TextButton(onPressed: () => {
                             ref.read(achievementsProvider.notifier).complete(0)
-                          }, child: const Text('activate')),
-                          TextButton(onPressed: () => {
-                            ref.read(achievementsProvider.notifier).reset()
-                          }, child: const Text('reset')),
+                          }, child: const Text('TEST BUTTON: obtain achievement')),
+
+              // const Divider(height: 4, color: Colors.blueGrey),
               Expanded(
                 child: ListView(
                   scrollDirection: Axis.vertical,
@@ -98,7 +141,34 @@ class AchievementsScreen extends ConsumerWidget {
                     )
                   ).toList()
                 )
-              )
+              ),
+
+              TextButton(
+                child: Text('Reset achievements', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
+                onPressed: () async {
+                  bool? confirmed = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Wait a second!"),
+                        content: const Text("Are you sure you want to reset achievements?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () { Navigator.of(context).pop(false); },
+                            child: const Text("Cancel"),
+                          ),
+                          TextButton(
+                            onPressed: () { Navigator.of(context).pop(true); },
+                            child: const Text("Confirm"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  
+                  if (confirmed == true) ref.read(achievementsProvider.notifier).reset();
+                },
+              ),
             ],
           ),
         ],
