@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sleep_tracker/achievements_provider.dart';
+import 'package:sleep_tracker/statistics_provider.dart';
 import 'nothern_lights.dart';
 
-// TODO: add nothern_lights as background
 class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final achievements = ref.watch(achievementsProvider);
+    final stats = ref.watch(statisticsProvider);
+
     const headerStyle = TextStyle(
       color: Colors.white,
       fontSize: 32,
@@ -23,11 +24,13 @@ class AchievementsScreen extends ConsumerWidget {
         ),
       ],
     );
+
     final normalStyle = TextStyle(
       color: Colors.grey.shade200,
       fontSize: 24,
       fontFamily: 'Montserrat'
     );
+
     final normalStyleGlow = TextStyle(
       color: Colors.grey.shade200,
       fontSize: 24,
@@ -53,7 +56,7 @@ class AchievementsScreen extends ConsumerWidget {
             children: [
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.only  (left: 8, right: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
@@ -63,21 +66,21 @@ class AchievementsScreen extends ConsumerWidget {
                       children: [
                         Text('Current consecutive days tracked', softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
-                        Text('0', softWrap: true, style: normalStyleGlow),
+                        Text('${stats.curConsDays}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                     Row(
                       children: [
                         Text('Maximum consecutive days tracked', softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
-                        Text('0', softWrap: true, style: normalStyleGlow),
+                        Text('${stats.maxConsDays}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                     Row(
                       children: [
                         Text('Total days tracked', softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
-                        Text('0', softWrap: true, style: normalStyleGlow),
+                        Text('${stats.total}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                   ]
@@ -143,15 +146,15 @@ class AchievementsScreen extends ConsumerWidget {
                 )
               ),
 
-              TextButton(
-                child: Text('Reset achievements', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
+              /*TextButton(
+                child: Text('Reset data', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
                 onPressed: () async {
                   bool? confirmed = await showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text("Wait a second!"),
-                        content: const Text("Are you sure you want to reset achievements?"),
+                        content: const Text("Are you sure you want to reset achievements and statistics?"),
                         actions: [
                           TextButton(
                             onPressed: () { Navigator.of(context).pop(false); },
@@ -166,9 +169,12 @@ class AchievementsScreen extends ConsumerWidget {
                     },
                   );
                   
-                  if (confirmed == true) ref.read(achievementsProvider.notifier).reset();
+                  if (confirmed == true) {
+                    ref.read(achievementsProvider.notifier).reset();
+                    ref.read(statisticsProvider.notifier).reset();
+                  }
                 },
-              ),
+              ),*/
             ],
           ),
         ],

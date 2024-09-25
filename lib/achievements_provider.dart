@@ -1,6 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_tracker/achievement.dart';
 import 'dart:convert';
@@ -25,6 +23,7 @@ class AchievementsNotifier extends StateNotifier<List<Achievement>> {
 
   void reset() {
     state = achievementDescriptions.map((x) => x.copyWith()).toList();
+    _saveToPreferences();
   }
 
   Future<void> _saveToPreferences() async {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sleep_tracker/achievements_analyser.dart';
 import 'package:sleep_tracker/achievements_screen.dart';
 import 'package:sleep_tracker/history_screen.dart';
 import 'package:sleep_tracker/settings_screen.dart';
@@ -125,11 +126,13 @@ class HomePageContent extends ConsumerWidget {
         const SnackBar(content: Text('Sleep session started!')),
       );
       Timer(sleepSession.getRemainingTime(), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SessionSummaryScreen()),
+          analyse(ref);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SessionSummaryScreen()),
+          );
+        }
       );
-    });
     }
   }
 

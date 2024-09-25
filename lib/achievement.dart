@@ -63,6 +63,6 @@ final List<Achievement> achievementDescriptions = [
   Achievement(
     id: 4,
     name: 'Creating Habits',
-    description: 'Manage your sleep for a 2 months. They say habits form after 66 days on average.'
+    description: 'Manage your sleep for a 2 months. They say habits form after 66 days on average. Do you feel like it?'
   ),
 ];
