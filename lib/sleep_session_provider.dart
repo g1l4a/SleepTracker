@@ -4,12 +4,15 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleep_tracker/sleep_session.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class SleepSessionNotifier extends StateNotifier<SleepSession> {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  static const String sessionCountKey = 'sessionCount';
 
-  SleepSessionNotifier(this.flutterLocalNotificationsPlugin) : super(SleepSession()) {
+  SleepSessionNotifier(this.flutterLocalNotificationsPlugin)
+      : super(SleepSession()) {
     loadFromPreferences();
   }
 
@@ -55,30 +58,73 @@ class SleepSessionNotifier extends StateNotifier<SleepSession> {
     _saveToPreferences();
   }
 
-   Duration getRemainingTime() {
+  Duration getRemainingTime() {
     return state.getRemainingTime();
   }
 
   Future<void> _saveToPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('startTime', state.startTime != null ? '${state.startTime!.hour}:${state.startTime!.minute}' : '');
-    await prefs.setString('endTime', state.endTime != null ? '${state.endTime!.hour}:${state.endTime!.minute}' : '');
-    await prefs.setBool('vibrationEnabled', state.vibrationEnabled);
-    await prefs.setBool('soundEnabled', state.soundEnabled);
-    await prefs.setBool('isSessionActive', state.isSessionActive);
+
+    // Check if the session is already saved and active
+    if (state.isSessionActive) {
+      int sessionCount = prefs.getInt(sessionCountKey) ?? 0;
+      String sessionKey = 'session_$sessionCount';
+
+      // Save the session only if it wasn't saved before
+      await prefs.setString(sessionKey, serializeSession(state));
+      await prefs.setInt(sessionCountKey, sessionCount + 1);
+    }
+  }
+
+  String serializeSession(SleepSession session) {
+    return '{"startTime": {"hour": ${session.startTime!.hour}, "minute": ${session.startTime!.minute}}, '
+        '"endTime": {"hour": ${session.endTime!.hour}, "minute": ${session.endTime!.minute}}, '
+        '"vibrationEnabled": ${session.vibrationEnabled}, '
+        '"soundEnabled": ${session.soundEnabled}, '
+        '"isSessionActive": ${session.isSessionActive}}';
   }
 
   Future<void> loadFromPreferences() async {
     final prefs = await SharedPreferences.getInstance();
+    int sessionCount = prefs.getInt(sessionCountKey) ?? 0;
+
+    for (int i = 0; i < sessionCount; i++) {
+      String sessionKey = 'session_$i';
+      int startHour = prefs.getInt('$sessionKey.startHour') ?? 0;
+      int startMinute = prefs.getInt('$sessionKey.startMinute') ?? 0;
+      int endHour = prefs.getInt('$sessionKey.endHour') ?? 0;
+      int endMinute = prefs.getInt('$sessionKey.endMinute') ?? 0;
+      bool vibrationEnabled =
+          prefs.getBool('$sessionKey.vibrationEnabled') ?? false;
+      bool soundEnabled = prefs.getBool('$sessionKey.soundEnabled') ?? true;
+      bool isSessionActive =
+          prefs.getBool('$sessionKey.isSessionActive') ?? false;
+
+      // Create a new SleepSession and process it as needed
+      SleepSession session = SleepSession(
+        startTime: TimeOfDay(hour: startHour, minute: startMinute),
+        endTime: TimeOfDay(hour: endHour, minute: endMinute),
+        vibrationEnabled: vibrationEnabled,
+        soundEnabled: soundEnabled,
+        isSessionActive: isSessionActive,
+      );
+
+      // Here, you would want to store the session data in a list or a similar structure for access
+    }
+
     final startTimeString = prefs.getString('startTime');
     if (startTimeString != null) {
       final timeParts = startTimeString.split(':');
-      state = state.copyWith(startTime: TimeOfDay(hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])));
+      state = state.copyWith(
+          startTime: TimeOfDay(
+              hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])));
     }
     final endTimeString = prefs.getString('endTime');
     if (endTimeString != null) {
       final timeParts = endTimeString.split(':');
-      state = state.copyWith(endTime: TimeOfDay(hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])));
+      state = state.copyWith(
+          endTime: TimeOfDay(
+              hour: int.parse(timeParts[0]), minute: int.parse(timeParts[1])));
     }
     state = state.copyWith(
       vibrationEnabled: prefs.getBool('vibrationEnabled') ?? false,
@@ -86,10 +132,9 @@ class SleepSessionNotifier extends StateNotifier<SleepSession> {
       isSessionActive: prefs.getBool('isSessionActive') ?? false,
     );
   }
-
 }
 
-
-final sleepSessionProvider = StateNotifierProvider<SleepSessionNotifier, SleepSession>((ref) {
+final sleepSessionProvider =
+    StateNotifierProvider<SleepSessionNotifier, SleepSession>((ref) {
   return SleepSessionNotifier(flutterLocalNotificationsPlugin);
 });
