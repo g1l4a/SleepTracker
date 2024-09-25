@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'settings_screen_provider.dart';
+import 'statistics_provider.dart';
+import 'achievements_provider.dart';
 import 'nothern_lights.dart';
 
 class SettingsScreen extends ConsumerWidget {
