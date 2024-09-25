@@ -46,6 +46,7 @@ class SleepSession {
 
     final startTimeInMinutes = startTime!.hour * 60 + startTime!.minute;
     final endTimeInMinutes = endTime!.hour * 60 + endTime!.minute;
+    isSessionActive = true;
 
     if (endTimeInMinutes <= startTimeInMinutes) {
       print("End time must be after the start time.");

@@ -1,18 +1,189 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sleep_tracker/achievements_provider.dart';
+import 'package:sleep_tracker/statistics_provider.dart';
+import 'nothern_lights.dart';
 
-// add nothern_lights as background
-class AchievementsScreen extends StatelessWidget {
+class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final achievements = ref.watch(achievementsProvider);
+    final stats = ref.watch(statisticsProvider);
+
+    const headerStyle = TextStyle(
+      color: Colors.white,
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Montserrat',
+      shadows: [
+        Shadow(
+          blurRadius: 5.0,
+          color: Colors.white,
+        ),
+      ],
+    );
+
+    final normalStyle = TextStyle(
+      color: Colors.grey.shade200,
+      fontSize: 24,
+      fontFamily: 'Montserrat'
+    );
+
+    final normalStyleGlow = TextStyle(
+      color: Colors.grey.shade200,
+      fontSize: 24,
+      fontFamily: 'Montserrat',
+      shadows: [
+        Shadow(
+          blurRadius: 5.0,
+          color: Colors.grey.shade200,
+        ),
+      ],
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Achievements'),
-      ),
-      body: const Center(
-        child: Text('Achievements and badges will be displayed here.'),
-      ),
+      body: Stack(
+        children: [
+          Container(
+            color: const Color.fromARGB(255, 0, 6, 88), 
+          ),
+          const Center(
+            child: NorthernLights(beginDirection: Alignment.topLeft, endDirection: Alignment.bottomRight,),
+          ),
+          Column(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    // AppLocalizations.of(context)!.achievementScreenTitle
+                    const Text('Achievements', textAlign: TextAlign.center, style: headerStyle),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                         // AppLocalizations.of(context)!.statisticsCurConsDays
+                        Text('Current consecutive days tracked', softWrap: true, style: normalStyle),
+                        const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
+                        Text('${stats.curConsDays}', softWrap: true, style: normalStyleGlow),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        // AppLocalizations.of(context)!.statisticsMaxConsDays
+                        Text('Maximum consecutive days tracked', softWrap: true, style: normalStyle),
+                        const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
+                        Text('${stats.maxConsDays}', softWrap: true, style: normalStyleGlow),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        // AppLocalizations.of(context)!.statisticsTotalDays
+                        Text('Total days tracked', softWrap: true, style: normalStyle),
+                        const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
+                        Text('${stats.total}', softWrap: true, style: normalStyleGlow),
+                      ],
+                    ),
+                  ]
+                )
+              ),
+
+              Expanded(
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  padding: const EdgeInsets.all(8),
+                  children: achievements.map(
+                    (s) => Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.emoji_events,
+                            size: 56,
+                            color: s.isObtained? Colors.amber : Colors.grey,
+                            shadows: s.isObtained? [
+                              const Shadow(
+                                blurRadius: 8.0,
+                                color: Colors.amber,
+                                offset: Offset(0, 2),
+                              ),
+                            ] : [])
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child:Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                // AppLocalizations.of(context)!.achievementNames(s.id)
+                                s.name,
+                                softWrap: true,
+                                style: TextStyle(
+                                  color: s.isObtained? Colors.grey.shade200 : Colors.blueGrey,
+                                  fontSize: 24,
+                                  fontFamily: 'Montserrat'
+                                )
+                              ),
+                              Text(
+                                // AppLocalizations.of(context)!.achievementDescriptions(s.id)
+                                s.description,
+                                softWrap: true,
+                                style: TextStyle(
+                                  color: s.isObtained? Colors.grey.shade400 : Colors.blueGrey,
+                                  fontSize: 18,
+                                  fontFamily: 'Montserrat'
+                                )
+                              )
+                            ],
+                          )
+                        )
+                      ],
+                    )
+                  ).toList()
+                )
+              ),
+
+              /*TextButton(
+                // AppLocalizations.of(context)!.btDataReset
+                child: Text('Reset data', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
+                onPressed: () async {
+                  bool? confirmed = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        // AppLocalizations.of(context)!.dataResetTitle
+                        title: const Text("Wait a second!"),
+                        // AppLocalizations.of(context)!.dataResetText
+                        content: const Text("Are you sure you want to reset achievements and statistics?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () { Navigator.of(context).pop(false); },
+                            // AppLocalizations.of(context)!.btCancel
+                            child: const Text("Cancel"),
+                          ),
+                          TextButton(
+                            onPressed: () { Navigator.of(context).pop(true); },
+                            // AppLocalizations.of(context)!.btConfirm
+                            child: const Text("Confirm"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  
+                  if (confirmed == true) {
+                    ref.read(achievementsProvider.notifier).reset();
+                    ref.read(statisticsProvider.notifier).reset();
+                  }
+                },
+              ),*/
+            ],
+          ),
+        ],
+      ), 
     );
   }
 }

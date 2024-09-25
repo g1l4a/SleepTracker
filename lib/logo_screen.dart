@@ -1,38 +1,66 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'onboarding_screen.dart';
 import 'home_screen.dart';
 import 'onboarding_provider.dart';
-import 'dart:math';
 import 'nothern_lights.dart';
 
-class LogoScreen extends ConsumerWidget {
+class LogoScreen extends ConsumerStatefulWidget {
   const LogoScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final onboardingCompleted = ref.watch(onboardingProvider);
+  _LogoScreenState createState() => _LogoScreenState();
+}
 
-    Future.delayed(const Duration(seconds: 5), () {
-      if (onboardingCompleted) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-      } else {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const OnboardingScreen()));
-      }
+class _LogoScreenState extends ConsumerState<LogoScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startNavigationTimer();
+  }
+
+  void _startNavigationTimer() {
+    _timer = Timer(const Duration(seconds: 5), () {
+      _navigateToNextScreen();
     });
+  }
 
+  void _navigateToNextScreen() {
+    final onboardingCompleted = ref.read(onboardingProvider);
+    if (onboardingCompleted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          
           Container(
-            color: const Color.fromARGB(255, 0, 6, 88), 
+            color: const Color.fromARGB(255, 0, 6, 88),
           ),
           // Northern Lights animation
           const Center(
-            child: NorthernLights(beginDirection: Alignment.bottomRight, endDirection: Alignment.topLeft,),
+            child: NorthernLights(beginDirection: Alignment.bottomRight, endDirection: Alignment.topLeft),
           ),
-          
           const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -54,35 +82,5 @@ class LogoScreen extends ConsumerWidget {
         ],
       ),
     );
-  }
-}
-
-class StarrySkyPainter extends CustomPainter {
-  final int numberOfStars;
-  final Random random = Random();
-
-  StarrySkyPainter({this.numberOfStars = 100}); 
-
-  @override
-  void paint(Canvas canvas, Size size) {
-
-    // Draw random stars
-    for (int i = 0; i < numberOfStars; i++) {
-      final double starSize = random.nextDouble() * 3; 
-      final double opacity = random.nextDouble() * 0.8 + 0.2; 
-      final Paint starPaint = Paint()..color = Colors.white.withOpacity(opacity);
-      
-      final Offset starOffset = Offset(
-        random.nextDouble() * size.width,
-        random.nextDouble() * size.height,
-      );
-
-      canvas.drawCircle(starOffset, starSize, starPaint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }

@@ -24,7 +24,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _initializeNotificationPlugin();
+  });
   }
 
   @override
