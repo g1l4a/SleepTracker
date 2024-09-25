@@ -78,7 +78,7 @@ class AchievementsScreen extends ConsumerWidget {
                                 softWrap: true,
                                 style: TextStyle(
                                   color: s.isObtained? Colors.grey.shade200 : Colors.blueGrey,
-                                  fontSize: 26,
+                                  fontSize: 24,
                                   fontFamily: 'Montserrat'
                                 )
                               ),
@@ -87,7 +87,7 @@ class AchievementsScreen extends ConsumerWidget {
                                 s.description,
                                 style: TextStyle(
                                   color: s.isObtained? Colors.grey.shade400 : Colors.blueGrey,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontFamily: 'Montserrat'
                                 )
                               )

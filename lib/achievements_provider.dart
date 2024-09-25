@@ -15,7 +15,7 @@ class AchievementsNotifier extends StateNotifier<List<Achievement>> {
   void complete(int id) {
     for(int i=0; i < state.length; ++i) {
       if(state[i].id == id) {
-        state[i].complete();
+        state[i].setIsObtained();
         break;
       }
     }
@@ -29,19 +29,22 @@ class AchievementsNotifier extends StateNotifier<List<Achievement>> {
 
   Future<void> _saveToPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> achievementsJsons = state.map((achievement) { return jsonEncode(achievement.toMap()); }).toList();
-    prefs.setStringList(achievementsKey, achievementsJsons);
+    Map<String, bool> achievementRecord = {for (var a in state) '${a.id}': a.isObtained};
+    prefs.setString(achievementsKey, jsonEncode(achievementRecord));
   }
 
   Future<void> loadFromPreferences() async {
+    List<Achievement> temp = achievementDescriptions.map((x) => x.copyWith()).toList();
+
     final prefs = await SharedPreferences.getInstance();
-    final achievementsJsons = prefs.getStringList(achievementsKey);
+    final achievementsJsons = prefs.getString(achievementsKey);
     if(achievementsJsons != null){
-      state = achievementsJsons.map((item) { return Achievement.fromMap(jsonDecode(item)); }).toList();
+      dynamic achievementRecord = jsonDecode(achievementsJsons);
+      for(int i=0; i<temp.length; i++) {
+        temp[i].setIsObtained(state: achievementRecord['${temp[i].id}']);
+      }
     }
-    else {
-      state = achievementDescriptions.map((x) => x.copyWith()).toList();
-    }
+    state = temp;
   }
 
 }

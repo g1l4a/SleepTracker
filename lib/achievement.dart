@@ -6,7 +6,7 @@ class Achievement {
 
   Achievement({required this.id, required this.name, required this.description, this.isObtained = false});
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap({compact=false}) {
     return {
       'id': id,
       'name': name,
@@ -34,20 +34,35 @@ class Achievement {
     );
   }
 
-  void complete() {
-    isObtained = true;
+  void setIsObtained({bool state=true}) {
+    isObtained = state;
   }
 }
 
 final List<Achievement> achievementDescriptions = [
   Achievement(
     id: 0,
-    name: 'First Steps',
+    name: 'Sweet Dreams',
     description: 'Complete your first sleep session. Keep it up!'
   ),
   Achievement(
     id: 1,
+    name: 'Noon Nap',
+    description: 'Sleep a little after lunch. Don\'t stay late at evening though!'
+  ),
+  Achievement(
+    id: 2,
     name: 'Week of Sleep',
-    description: 'Manage your sleep for a week straight.'
+    description: 'Manage your sleep for a week straight. Not so hard, right?'
+  ),
+  Achievement(
+    id: 3,
+    name: 'Month of Sleep',
+    description: 'Manage your sleep for a month straight.'
+  ),
+  Achievement(
+    id: 4,
+    name: 'Creating Habits',
+    description: 'Manage your sleep for a 2 months. They say habits form after 66 days on average, don\'t they?'
   ),
 ];
