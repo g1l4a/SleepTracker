@@ -46,6 +46,7 @@ class SleepSession {
 
     final startTimeInMinutes = startTime!.hour * 60 + startTime!.minute;
     final endTimeInMinutes = endTime!.hour * 60 + endTime!.minute;
+    isSessionActive = true;
 
     if (endTimeInMinutes <= startTimeInMinutes) {
       print("End time must be after the start time.");
@@ -96,20 +97,23 @@ class SleepSession {
   }
 
   Duration getRemainingTime() {
-    if (startTime == null || endTime == null) {
-      return Duration.zero;
-    }
+  final now = TimeOfDay.now();
+  
+  int nowInMinutes = now.hour * 60 + now.minute;
+  int startInMinutes = (startTime?.hour ?? now.hour) * 60 + (startTime?.minute ?? now.minute);
+  int endInMinutes = (endTime?.hour ?? now.hour) * 60 + (endTime?.minute ?? now.minute);
+  
+  if (endInMinutes <= startInMinutes) {
+    endInMinutes += 24 * 60; 
+  }
 
-    final now = TimeOfDay.now();
-    final nowInMinutes = now.hour * 60 + now.minute;
-    final endInMinutes = endTime!.hour * 60 + endTime!.minute;
-
-    if (nowInMinutes >= endInMinutes) {
-      return Duration.zero;
-    }
-
+  if (nowInMinutes >= startInMinutes && nowInMinutes < endInMinutes) {
     return Duration(minutes: endInMinutes - nowInMinutes);
   }
+  
+  return Duration.zero; 
+}
+
 
   void startTimer(Function onUpdate) {
     _timer = Timer.periodic(Duration(seconds: 1), (_) {

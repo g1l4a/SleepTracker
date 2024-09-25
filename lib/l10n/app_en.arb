@@ -1,0 +1,38 @@
+{
+  "achievementNames": "{
+    count, plural,
+    =0{Sweet Dreams}
+    =1{Noon Nap}
+    =2{Week of Sleep}
+    =3{Month of Sleep}
+    =4{Creating Habits}
+  }",
+  "achievementDescriptions": "{
+    count, plural,
+    =0{Complete your first sleep session. Keep it up!}
+    =1{Sleep a little after lunch. Don\'t stay late at evening though!}
+    =2{Manage your sleep for a week straight. Not so hard, right?}
+    =3{Manage your sleep for a month straight.}
+    =4{Manage your sleep for a 2 months. They say habits form after 66 days on average. Do you feel like it?}
+  }",
+  "achievementScreenTitle": "Achievements",
+  "statisticsCurConsDays": "Current consecutive days tracked",
+  "statisticsMaxConsDays": "Maximum consecutive days tracked",
+  "statisticsTotalDays": "Total days tracked",
+  "dataResetTitle": "Wait a second!",
+  "dataResetText": "Are you sure you want to reset achievements and statistics?",
+  "btCancel": "Cancel",
+  "btConfirm": "Confirm",
+  "btDataReset": "Reset Data",
+  "bnbHome": "Home",
+  "barHistory": "History",
+  "barSettings": "Settings",
+  "barAchievements": "Achievements",
+  "popSessionStart": "Sleep session started!",
+  "popSessionCancel": "Sleep session canceled!",
+  "btSessionStart": 'Start\nSession',
+  "btSessionCancel": 'Cancel\nSession',
+  "timeLeft": "Time left: "
+  "startTime": "Start Time:"
+  "endTime": "End Time:"
+}

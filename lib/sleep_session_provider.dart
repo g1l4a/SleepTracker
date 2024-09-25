@@ -23,7 +23,7 @@ class SleepSessionNotifier extends StateNotifier<SleepSession> {
     }
     state.stopTimer();
     state.startTimer(() {
-      state = state.copyWith();
+      state = state.copyWith(isSessionActive: true);
     });
 
     state = state.copyWith(isSessionActive: true);
