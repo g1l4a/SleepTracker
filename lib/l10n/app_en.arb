@@ -23,5 +23,16 @@
   "dataResetText": "Are you sure you want to reset achievements and statistics?",
   "btCancel": "Cancel",
   "btConfirm": "Confirm",
-  "btDataReset": "ResetData",
+  "btDataReset": "Reset Data",
+  "bnbHome": "Home",
+  "barHistory": "History",
+  "barSettings": "Settings",
+  "barAchievements": "Achievements",
+  "popSessionStart": "Sleep session started!",
+  "popSessionCancel": "Sleep session canceled!",
+  "btSessionStart": 'Start\nSession',
+  "btSessionCancel": 'Cancel\nSession',
+  "timeLeft": "Time left: "
+  "startTime": "Start Time:"
+  "endTime": "End Time:"
 }

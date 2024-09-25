@@ -23,4 +23,16 @@
   "dataResetText": "Ты уверен, что хочешь стереть все данные?",
   "btCancel": "Отмена",
   "btConfirm": "Подтвердить",
+  "btDataReset": "Сбросить данные",
+  "bnbHome": "Главная",
+  "barHistory": "История",
+  "barSettings": "Настройки",
+  "barAchievements": "Достижения",
+  "popSessionStart": "Сессия сна начата!",
+  "popSessionCancel": "Сессия сна отменена!",
+  "btSessionStart": 'Начать\nСессию',
+  "btSessionCancel": 'Закончить\nСессию',
+  "timeLeft": "Времени осталось: "
+  "startTime": "Время начала:"
+  "endTime": "Время окончания:"
 }
