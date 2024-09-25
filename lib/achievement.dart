@@ -6,24 +6,6 @@ class Achievement {
 
   Achievement({required this.id, required this.name, required this.description, this.isObtained = false});
 
-  Map<String, dynamic> toMap({compact=false}) {
-    return {
-      'id': id,
-      'name': name,
-      'description': description,
-      'isObtained': isObtained,
-    };
-  }
-
-  factory Achievement.fromMap(Map<String, dynamic> map) {
-    return Achievement(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
-      isObtained: map['isObtained'],
-    );
-  }
-
   Achievement copyWith({int? id, bool? isObtained})
   {
     return Achievement(
