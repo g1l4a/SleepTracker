@@ -65,12 +65,10 @@ class SleepSessionNotifier extends StateNotifier<SleepSession> {
   Future<void> _saveToPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
-    // Check if the session is already saved and active
     if (state.isSessionActive) {
       int sessionCount = prefs.getInt(sessionCountKey) ?? 0;
       String sessionKey = 'session_$sessionCount';
 
-      // Save the session only if it wasn't saved before
       await prefs.setString(sessionKey, serializeSession(state));
       await prefs.setInt(sessionCountKey, sessionCount + 1);
     }
@@ -108,8 +106,6 @@ class SleepSessionNotifier extends StateNotifier<SleepSession> {
         soundEnabled: soundEnabled,
         isSessionActive: isSessionActive,
       );
-
-      // Here, you would want to store the session data in a list or a similar structure for access
     }
 
     final startTimeString = prefs.getString('startTime');

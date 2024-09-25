@@ -7,16 +7,7 @@ import 'package:sleep_tracker/sleep_session_provider.dart';
 import 'package:sleep_tracker/sleep_session.dart';
 import 'nothern_lights.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// upload and download session history from sleep_session using shared_prefernces methods
-// add nothern_lights as background
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sleep_tracker/sleep_session_provider.dart';
-import 'package:sleep_tracker/sleep_session.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'nothern_lights.dart';
-import 'dart:convert'; // Import for JSON serialization
+import 'dart:convert'; // JSON
 
 class HistoryScreen extends ConsumerStatefulWidget {
   const HistoryScreen({super.key});
@@ -26,8 +17,8 @@ class HistoryScreen extends ConsumerStatefulWidget {
 }
 
 class _HistoryScreenState extends ConsumerState<HistoryScreen> {
-  List<SleepSession> sessionHistory = []; // Store session history
-  Map<String, int> commonSettings = {}; // For tracking common settings
+  List<SleepSession> sessionHistory = [];
+  Map<String, int> commonSettings = {};
 
   @override
   void initState() {
@@ -65,7 +56,6 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
       vibrationEnabled: json['vibrationEnabled'],
       soundEnabled: json['soundEnabled'],
       isSessionActive: json['isSessionActive'],
-      // Add other properties as necessary
     );
   }
 
