@@ -9,8 +9,11 @@ bool _isDifferentDay(DateTime date1, DateTime date2) {
   return date1.year != date2.year || date1.month != date2.month || date1.day != date2.day;
 }
 
-void analyse(WidgetRef ref) {
+void analyse(WidgetRef ref) async {
   print('Analyse session');
+  await ref.read(statisticsProvider.notifier).loadFromPreferences();
+  //await ref.read(sleepSessionProvider.notifier).loadFromPreferences();
+  await ref.read(achievementsProvider.notifier).loadFromPreferences();
   Statistics stats = ref.read(statisticsProvider);
   SleepSession newSession = ref.read(sleepSessionProvider);
 

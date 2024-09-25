@@ -141,7 +141,7 @@ class AchievementsScreen extends ConsumerWidget {
                 )
               ),
 
-              /*TextButton(
+              TextButton(
                 child: Text('Reset data', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
                 onPressed: () async {
                   bool? confirmed = await showDialog(
@@ -169,7 +169,7 @@ class AchievementsScreen extends ConsumerWidget {
                     ref.read(statisticsProvider.notifier).reset();
                   }
                 },
-              ),*/
+              ),
             ],
           ),
         ],
