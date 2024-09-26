@@ -9,6 +9,10 @@ class MockSharedPreferences extends Mock implements SharedPreferences {}
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  setUp(() async {
+    
+    SharedPreferences.setMockInitialValues({}); 
+  });
   test('saves and loads boolean setting', () async {
     await SettingsSharedPreferences.saveSetting('testBool', true);
     expect(await SettingsSharedPreferences.loadSetting('testBool', false), true);
