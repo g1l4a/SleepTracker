@@ -7,6 +7,7 @@ import 'package:sleep_tracker/history_screen.dart';
 import 'package:sleep_tracker/settings_screen.dart';
 import 'package:sleep_tracker/sleep_session_provider.dart';
 import 'nothern_lights.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'session_summary_screen.dart';
 
 
@@ -62,22 +63,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: AppLocalizations.of(context)!.bnbHome,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: AppLocalizations.of(context)!.barSettings,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            label: 'Statistics',
+            label: AppLocalizations.of(context)!.barStats,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.emoji_events),
-            label: 'Achievements',
+            label: AppLocalizations.of(context)!.barAchievements,
           ),
         ],
         currentIndex: _selectedIndex,
@@ -117,12 +118,12 @@ class HomePageContent extends ConsumerWidget {
     if (sleepSession.isSessionActive) {
       await sleepSessionNotifier.cancelSession();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sleep session canceled!')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.popSessionStart)),
       );
     } else {
       await sleepSessionNotifier.startSession();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sleep session started!')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.popSessionCancel)),
       );
       Timer(sleepSession.getRemainingTime(), () {
           analyse(ref);
@@ -187,7 +188,7 @@ class HomePageContent extends ConsumerWidget {
                         ),
                         child: Center(
                           child: Text(
-                              sleepSession.isSessionActive ? 'Cancel\nSession' : 'Start\nSession',
+                              sleepSession.isSessionActive ? AppLocalizations.of(context)!.btSessionCancel : AppLocalizations.of(context)!.btSessionStart,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -228,7 +229,7 @@ class HomePageContent extends ConsumerWidget {
                   ),
                   child: Text(
                     sleepSession.isSessionActive? 
-                    'Time left: ${_formatDuration(sleepSession.getRemainingTime())}' : 'Time left: 00:00',
+                    AppLocalizations.of(context)!.timeLeft + '${_formatDuration(sleepSession.getRemainingTime())}' : AppLocalizations.of(context)!.timeLeft + '00:00',
                     style: TextStyle(
                       fontSize: 20, 
                       color: Colors.white.withOpacity(0.9),
@@ -242,8 +243,8 @@ class HomePageContent extends ConsumerWidget {
 
             const SizedBox(height: 30),
             ListTile(
-                title: const Text(
-                  'Start Time:',
+                title: Text(
+                  AppLocalizations.of(context)!.startTime,
                   style: TextStyle(
                     color: Colors.white, 
                     fontWeight: FontWeight.w400, 
@@ -276,8 +277,8 @@ class HomePageContent extends ConsumerWidget {
 
             const SizedBox(height: 10),
             ListTile(
-              title: const Text(
-                'End Time:',
+              title: Text(
+                AppLocalizations.of(context)!.endTime,
                 style: TextStyle(
                     color: Colors.white, 
                     fontWeight: FontWeight.w300,

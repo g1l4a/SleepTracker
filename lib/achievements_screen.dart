@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sleep_tracker/achievements_provider.dart';
 import 'package:sleep_tracker/statistics_provider.dart';
 import 'nothern_lights.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
@@ -60,29 +61,25 @@ class AchievementsScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
-                    // AppLocalizations.of(context)!.achievementScreenTitle
-                    const Text('Achievements', textAlign: TextAlign.center, style: headerStyle),
+                    Text(AppLocalizations.of(context)!.achievementScreenTitle, textAlign: TextAlign.center, style: headerStyle),
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                         // AppLocalizations.of(context)!.statisticsCurConsDays
-                        Text('Current consecutive days tracked', softWrap: true, style: normalStyle),
+                        Text(AppLocalizations.of(context)!.statisticsCurConsDays, softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.curConsDays}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                     Row(
                       children: [
-                        // AppLocalizations.of(context)!.statisticsMaxConsDays
-                        Text('Maximum consecutive days tracked', softWrap: true, style: normalStyle),
+                        Text(AppLocalizations.of(context)!.statisticsMaxConsDays, softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.maxConsDays}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                     Row(
                       children: [
-                        // AppLocalizations.of(context)!.statisticsTotalDays
-                        Text('Total days tracked', softWrap: true, style: normalStyle),
+                        Text(AppLocalizations.of(context)!.statisticsTotalDays, softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.total}', softWrap: true, style: normalStyleGlow),
                       ],
@@ -118,8 +115,7 @@ class AchievementsScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                // AppLocalizations.of(context)!.achievementNames(s.id)
-                                s.name,
+                                _getAchievementName(context, s.id),
                                 softWrap: true,
                                 style: TextStyle(
                                   color: s.isObtained? Colors.grey.shade200 : Colors.blueGrey,
@@ -128,8 +124,7 @@ class AchievementsScreen extends ConsumerWidget {
                                 )
                               ),
                               Text(
-                                // AppLocalizations.of(context)!.achievementDescriptions(s.id)
-                                s.description,
+                                _getAchievementDescription(context, s.id),
                                 softWrap: true,
                                 style: TextStyle(
                                   color: s.isObtained? Colors.grey.shade400 : Colors.blueGrey,
@@ -145,45 +140,44 @@ class AchievementsScreen extends ConsumerWidget {
                   ).toList()
                 )
               ),
-
-              /*TextButton(
-                // AppLocalizations.of(context)!.btDataReset
-                child: Text('Reset data', style: normalStyle.copyWith(fontSize: 16, color: Colors.grey)),
-                onPressed: () async {
-                  bool? confirmed = await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        // AppLocalizations.of(context)!.dataResetTitle
-                        title: const Text("Wait a second!"),
-                        // AppLocalizations.of(context)!.dataResetText
-                        content: const Text("Are you sure you want to reset achievements and statistics?"),
-                        actions: [
-                          TextButton(
-                            onPressed: () { Navigator.of(context).pop(false); },
-                            // AppLocalizations.of(context)!.btCancel
-                            child: const Text("Cancel"),
-                          ),
-                          TextButton(
-                            onPressed: () { Navigator.of(context).pop(true); },
-                            // AppLocalizations.of(context)!.btConfirm
-                            child: const Text("Confirm"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                  
-                  if (confirmed == true) {
-                    ref.read(achievementsProvider.notifier).reset();
-                    ref.read(statisticsProvider.notifier).reset();
-                  }
-                },
-              ),*/
             ],
           ),
         ],
       ), 
     );
+  }
+}
+
+String _getAchievementName(BuildContext context, int id) {
+  switch (id) {
+    case 0:
+      return AppLocalizations.of(context)!.achievementName0;
+    case 1:
+      return AppLocalizations.of(context)!.achievementName1;
+    case 2:
+      return AppLocalizations.of(context)!.achievementName2;
+    case 3:
+      return AppLocalizations.of(context)!.achievementName3;
+    case 4:
+      return AppLocalizations.of(context)!.achievementName4;
+    default:
+      return "";
+  }
+}
+
+String _getAchievementDescription(BuildContext context, int id) {
+  switch (id) {
+    case 0:
+      return AppLocalizations.of(context)!.achievementDescription0;
+    case 1:
+      return AppLocalizations.of(context)!.achievementDescription1;
+    case 2:
+      return AppLocalizations.of(context)!.achievementDescription2;
+    case 3:
+      return AppLocalizations.of(context)!.achievementDescription3;
+    case 4:
+      return AppLocalizations.of(context)!.achievementDescription4;
+    default:
+      return "";
   }
 }

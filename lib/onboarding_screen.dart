@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'home_screen.dart';
 import 'onboarding_provider.dart';
 import 'nothern_lights.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class OnboardingScreen extends ConsumerStatefulWidget {
@@ -92,24 +93,24 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   children: [
                     buildOnboardingPage(
                       context,
-                      title: 'Welcome to Sleep Tracker',
-                      description: 'Track your sleep for a better tomorrow.',
+                      title: AppLocalizations.of(context)!.onboardingTitle1,
+                      description: AppLocalizations.of(context)!.onboardingDescription1,
                       image: Icons.bedtime,
                       onNextPage: _nextPage,
                     ),
                     buildOnboardingPage(
                       context,
-                      title: 'Sleep Session Tracking',
+                      title: AppLocalizations.of(context)!.onboardingTitle2,
                       description:
-                          'Track your sleep session and duration',
+                          AppLocalizations.of(context)!.onboardingDescription2,
                       image: Icons.timer,
                       onNextPage: _nextPage
                     ),
                     buildOnboardingPage(
                       context,
-                      title: 'Permissions',
+                      title: AppLocalizations.of(context)!.onboardingTitle3,
                       description:
-                          'We need some permissions to enhance your experience.',
+                          AppLocalizations.of(context)!.onboardingDescription3,
                       image: Icons.notifications,
                       isLastPage: true,
                       onComplete: () async {
@@ -180,8 +181,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     ),
                     elevation: 8, 
                   ),
-                  child: const Text(
-                    'Next',
+                  child: Text(
+                    AppLocalizations.of(context)!.next,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -202,8 +203,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     ),
                     elevation: 8, 
                   ),
-                  child: const Text(
-                    'Next',
+                  child: Text(
+                    AppLocalizations.of(context)!.next,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
