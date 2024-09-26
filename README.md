@@ -8,13 +8,14 @@ A cross-platform sleep tracking app built using Flutter. The app helps users mon
 ## Screenshots and GIFs
 
 
-||![ach](https://github.com/user-attachments/assets/4979adf1-e64a-481a-9e9c-ff4ef82bae99)
-|![home](https://github.com/user-attachments/assets/7ef2b976-2518-4d0a-8e94-c9c1600214d6)|![SleepSession](https://github.com/user-attachments/assets/f95aa593-3af4-4ca6-ab5d-d1b0f07901ee)|![Settings Screen](https://github.com/user-attachments/assets/a9f49dc9-da98-4c0d-89f4-f47de8858062)|
+![ach](https://github.com/user-attachments/assets/4979adf1-e64a-481a-9e9c-ff4ef82bae99)
+![home](https://github.com/user-attachments/assets/7ef2b976-2518-4d0a-8e94-c9c1600214d6)
+![SleepSession](https://github.com/user-attachments/assets/f95aa593-3af4-4ca6-ab5d-d1b0f07901ee)
+![Settings Screen](https://github.com/user-attachments/assets/a9f49dc9-da98-4c0d-89f4-f47de8858062)
 
 GIF of Onboarding Screen:
 
-![App GIF](
-https://github.com/user-attachments/assets/8661a2e9-514d-4b80-a6fa-35b48c370ab2) 
+![App GIF](https://github.com/user-attachments/assets/8661a2e9-514d-4b80-a6fa-35b48c370ab2) 
 
 ---
 
