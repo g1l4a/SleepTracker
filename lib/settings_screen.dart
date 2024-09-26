@@ -55,11 +55,11 @@ class SettingsScreen extends ConsumerWidget {
                   value: settings.notificationsEnabled,
                   onChanged: notifier.toggleNotifications,
                 ),
-                /*SwitchListTile(
+                SwitchListTile(
                   title: Text(AppLocalizations.of(context)!.enDark, style: TextStyle(color: Colors.white)),
                   value: settings.isDarkMode,
                   onChanged: notifier.toggleTheme,
-                ),*/
+                ),
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.language,
