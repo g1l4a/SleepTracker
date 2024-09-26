@@ -68,7 +68,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(canvasColor: isDarkMode ? Color.fromARGB(255, 43, 4, 134) : Colors.white),
       child: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: AppLocalizations.of(context)!.bnbHome,
