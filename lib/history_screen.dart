@@ -133,7 +133,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
         return Card(
           color: Colors.white.withOpacity(0.8),
           child: ListTile(
-            title: Text("Session ${index + 1}"),
+            title: Text(AppLocalizations.of(context)!.session + "${index + 1}"),
             subtitle: Text(
               AppLocalizations.of(context)!.start + ": ${session.startTime!.hour}:${session.startTime!.minute}\n" +
               AppLocalizations.of(context)!.end + ": ${session.endTime!.hour}:${session.endTime!.minute}\n" +

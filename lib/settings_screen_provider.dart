@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class Settings {
@@ -13,7 +14,7 @@ class Settings {
     this.isDarkMode = true,
     this.vibrationEnabled = false,
     this.soundEnabled = true,
-    this.language = 'eng',
+    this.language = 'en',
     this.notificationsEnabled = false,
   });
 
@@ -79,7 +80,7 @@ class SettingsNotifier extends StateNotifier<Settings> {
       isDarkMode: prefs.getBool('isDarkMode') ?? false,
       vibrationEnabled: prefs.getBool('vibrationEnabled') ?? false,
       soundEnabled: prefs.getBool('soundEnabled') ?? true,
-      language: prefs.getString('language') ?? 'eng',
+      language: prefs.getString('language') ?? 'en',
       notificationsEnabled: prefs.getBool('notificationsEnabled') ?? false,
     );
   }

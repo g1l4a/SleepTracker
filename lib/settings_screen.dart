@@ -5,6 +5,7 @@ import 'statistics_provider.dart';
 import 'achievements_provider.dart';
 import 'nothern_lights.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'settings_screen_shared_preferences.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -54,11 +55,11 @@ class SettingsScreen extends ConsumerWidget {
                   value: settings.notificationsEnabled,
                   onChanged: notifier.toggleNotifications,
                 ),
-                SwitchListTile(
+                /*SwitchListTile(
                   title: Text(AppLocalizations.of(context)!.enDark, style: TextStyle(color: Colors.white)),
                   value: settings.isDarkMode,
                   onChanged: notifier.toggleTheme,
-                ),
+                ),*/
                 const SizedBox(height: 20),
                 Text(
                   AppLocalizations.of(context)!.language,
@@ -67,11 +68,12 @@ class SettingsScreen extends ConsumerWidget {
                 ListTile(
                   title: const Text('English', style: TextStyle(color: Colors.white)),
                   leading: Radio<String>(
-                    value: 'eng',
+                    value: 'en',
                     groupValue: settings.language,
                     onChanged: (String? lang) {
                       if (lang != null) {
                         notifier.setLanguage(lang);
+                        _changeLocale(lang, notifier);
                       }
                     },
                   ),
@@ -79,11 +81,12 @@ class SettingsScreen extends ConsumerWidget {
                 ListTile(
                   title: const Text('Русский', style: TextStyle(color: Colors.white)),
                   leading: Radio<String>(
-                    value: 'rus',
+                    value: 'ru',
                     groupValue: settings.language,
                     onChanged: (String? lang) {
                       if (lang != null) {
                         notifier.setLanguage(lang);
+                        _changeLocale(lang, notifier);
                       }
                     },
                   ),
@@ -127,5 +130,10 @@ class SettingsScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  void _changeLocale(String lang, SettingsNotifier notifier) {
+    SettingsSharedPreferences.saveSetting('language', lang);
+    notifier.setLanguage(lang);
   }
 }
