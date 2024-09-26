@@ -1,7 +1,7 @@
 # Sleep Tracker App
 
 A cross-platform sleep tracking app built using Flutter. The app helps users monitor their sleep, set goals, and track progress.
-(![image](https://github.com/user-attachments/assets/8ea18b16-e4dc-4f67-b6e9-cd4e21e8f616)
+![image](https://github.com/user-attachments/assets/8ea18b16-e4dc-4f67-b6e9-cd4e21e8f616)
 
 ---
 
