@@ -57,37 +57,37 @@ class SleepSession {
     await _saveToPreferences();
   }
 
-  Future<void> _scheduleAlarm(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-    final endTimeDateTime = DateTime.now().add(Duration(
-      hours: endTime!.hour - TimeOfDay.now().hour,
-      minutes: endTime!.minute - TimeOfDay.now().minute,
-    ));
+  // Future<void> _scheduleAlarm(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
+  //   final endTimeDateTime = DateTime.now().add(Duration(
+  //     hours: endTime!.hour - TimeOfDay.now().hour,
+  //     minutes: endTime!.minute - TimeOfDay.now().minute,
+  //   ));
 
-    var androidDetails = AndroidNotificationDetails(
-      'sleep_session_channel',
-      'Sleep Session Channel',
-      importance: Importance.high,
-      priority: Priority.high,
-      vibrationPattern: vibrationEnabled ? Int64List.fromList([0, 1000, 500, 1000]) : null,
-      sound: soundEnabled ? const RawResourceAndroidNotificationSound('alarm') : null,
-    );
+  //   var androidDetails = AndroidNotificationDetails(
+  //     'sleep_session_channel',
+  //     'Sleep Session Channel',
+  //     importance: Importance.high,
+  //     priority: Priority.high,
+  //     vibrationPattern: vibrationEnabled ? Int64List.fromList([0, 1000, 500, 1000]) : null,
+  //     sound: soundEnabled ? const RawResourceAndroidNotificationSound('alarm') : null,
+  //   );
     
-    var platformDetails = NotificationDetails(android: androidDetails);
+  //   var platformDetails = NotificationDetails(android: androidDetails);
     
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      0,
-      'Wake up!',
-      'Your sleep session has ended.',
-      tz.TZDateTime.from(endTimeDateTime, tz.local),
-      platformDetails,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
+  //   await flutterLocalNotificationsPlugin.zonedSchedule(
+  //     0,
+  //     'Wake up!',
+  //     'Your sleep session has ended.',
+  //     tz.TZDateTime.from(endTimeDateTime, tz.local),
+  //     platformDetails,
+  //     androidAllowWhileIdle: true,
+  //     uiLocalNotificationDateInterpretation:
+  //         UILocalNotificationDateInterpretation.absoluteTime,
+  //     matchDateTimeComponents: DateTimeComponents.time,
+  //   );
 
-    print("Alarm scheduled for ${getFormattedTime(endTime)}.");
-  }
+  //   print("Alarm scheduled for ${getFormattedTime(endTime)}.");
+  // }
 
   String getFormattedTime(TimeOfDay? time) {
     if (time == null) return '--:--';
