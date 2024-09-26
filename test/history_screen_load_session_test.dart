@@ -8,12 +8,6 @@ import 'package:sleep_tracker/history_screen.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
-  late MockSharedPreferences mockSharedPreferences;
-
-  setUp(() {
-    mockSharedPreferences = MockSharedPreferences();
-    SharedPreferences.setMockInitialValues({});
-  });
 
   Widget createWidgetUnderTest() {
     return const ProviderScope(

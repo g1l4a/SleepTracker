@@ -93,24 +93,24 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   children: [
                     buildOnboardingPage(
                       context,
-                      title: AppLocalizations.of(context)!.onboardingTitle1,
-                      description: AppLocalizations.of(context)!.onboardingDescription1,
+                      title: AppLocalizations.of(context).onboardingTitle1,
+                      description: AppLocalizations.of(context).onboardingDescription1,
                       image: Icons.bedtime,
                       onNextPage: _nextPage,
                     ),
                     buildOnboardingPage(
                       context,
-                      title: AppLocalizations.of(context)!.onboardingTitle2,
+                      title: AppLocalizations.of(context).onboardingTitle2,
                       description:
-                          AppLocalizations.of(context)!.onboardingDescription2,
+                          AppLocalizations.of(context).onboardingDescription2,
                       image: Icons.timer,
                       onNextPage: _nextPage
                     ),
                     buildOnboardingPage(
                       context,
-                      title: AppLocalizations.of(context)!.onboardingTitle3,
+                      title: AppLocalizations.of(context).onboardingTitle3,
                       description:
-                          AppLocalizations.of(context)!.onboardingDescription3,
+                          AppLocalizations.of(context).onboardingDescription3,
                       image: Icons.notifications,
                       isLastPage: true,
                       onComplete: () async {
@@ -182,7 +182,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     elevation: 8, 
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.next,
+                    AppLocalizations.of(context).next,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -204,7 +204,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     elevation: 8, 
                   ),
                   child: Text(
-                    AppLocalizations.of(context)!.next,
+                    AppLocalizations.of(context).next,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

@@ -6,12 +6,6 @@ import 'package:sleep_tracker/settings_screen_shared_preferences.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
-  late MockSharedPreferences mockSharedPreferences;
-
-  setUp(() async {
-    mockSharedPreferences = MockSharedPreferences();
-    SharedPreferences.setMockInitialValues({});
-  });
 
   test('saves and loads boolean setting', () async {
     await SettingsSharedPreferences.saveSetting('testBool', true);

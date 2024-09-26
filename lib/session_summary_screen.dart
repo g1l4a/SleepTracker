@@ -33,19 +33,19 @@ class SessionSummaryScreen extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.sessionSummary,
+                  AppLocalizations.of(context).sessionSummary,
                   style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
                 
                 Text(
-                  AppLocalizations.of(context)!.youSleptFor + "${sessionSummary.duration.inHours}" + AppLocalizations.of(context)!.hoursAnd + "${sessionSummary.duration.inMinutes % 60}" + AppLocalizations.of(context)!.minutes,
+                  AppLocalizations.of(context).youSleptFor + "${sessionSummary.duration.inHours}" + AppLocalizations.of(context).hoursAnd + "${sessionSummary.duration.inMinutes % 60}" + AppLocalizations.of(context).minutes,
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 const SizedBox(height: 30),
 
                 Text(
-                  AppLocalizations.of(context)!.howWasYourSleep,
+                  AppLocalizations.of(context).howWasYourSleep,
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
@@ -71,7 +71,7 @@ class SessionSummaryScreen extends ConsumerWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(AppLocalizations.of(context)!.backToHome),
+                  child: Text(AppLocalizations.of(context).backToHome),
                 ),
               ],
             ),

@@ -22,20 +22,20 @@ class SleepSessionScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.sessionProgress),
+        title: Text(AppLocalizations.of(context).sessionProgress),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context)!.remainingTime + '${sleepSession.getRemainingTime().inMinutes}' + AppLocalizations.of(context)!.minutes,
+              AppLocalizations.of(context).remainingTime + '${sleepSession.getRemainingTime().inMinutes}' + AppLocalizations.of(context).minutes,
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () => _endSession(context, ref),
-              child: Text(AppLocalizations.of(context)!.endSession),
+              child: Text(AppLocalizations.of(context).endSession),
             ),
           ],
         ),

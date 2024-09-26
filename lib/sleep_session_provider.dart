@@ -106,6 +106,7 @@ class SleepSessionNotifier extends StateNotifier<SleepSession> {
         soundEnabled: soundEnabled,
         isSessionActive: isSessionActive,
       );
+      print(session.endTime);
     }
 
     final startTimeString = prefs.getString('startTime');

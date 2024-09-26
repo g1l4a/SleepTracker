@@ -61,25 +61,25 @@ class AchievementsScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
-                    Text(AppLocalizations.of(context)!.achievementScreenTitle, textAlign: TextAlign.center, style: headerStyle),
+                    Text(AppLocalizations.of(context).achievementScreenTitle, textAlign: TextAlign.center, style: headerStyle),
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        Text(AppLocalizations.of(context)!.statisticsCurConsDays, softWrap: true, style: normalStyle),
+                        Text(AppLocalizations.of(context).statisticsCurConsDays, softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.curConsDays}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                     Row(
                       children: [
-                        Text(AppLocalizations.of(context)!.statisticsMaxConsDays, softWrap: true, style: normalStyle),
+                        Text(AppLocalizations.of(context).statisticsMaxConsDays, softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.maxConsDays}', softWrap: true, style: normalStyleGlow),
                       ],
                     ),
                     Row(
                       children: [
-                        Text(AppLocalizations.of(context)!.statisticsTotalDays, softWrap: true, style: normalStyle),
+                        Text(AppLocalizations.of(context).statisticsTotalDays, softWrap: true, style: normalStyle),
                         const Expanded(child: Divider(color: Colors.blueGrey, indent: 16, endIndent: 16)),
                         Text('${stats.total}', softWrap: true, style: normalStyleGlow),
                       ],
@@ -151,15 +151,15 @@ class AchievementsScreen extends ConsumerWidget {
 String _getAchievementName(BuildContext context, int id) {
   switch (id) {
     case 0:
-      return AppLocalizations.of(context)!.achievementName0;
+      return AppLocalizations.of(context).achievementName0;
     case 1:
-      return AppLocalizations.of(context)!.achievementName1;
+      return AppLocalizations.of(context).achievementName1;
     case 2:
-      return AppLocalizations.of(context)!.achievementName2;
+      return AppLocalizations.of(context).achievementName2;
     case 3:
-      return AppLocalizations.of(context)!.achievementName3;
+      return AppLocalizations.of(context).achievementName3;
     case 4:
-      return AppLocalizations.of(context)!.achievementName4;
+      return AppLocalizations.of(context).achievementName4;
     default:
       return "";
   }
@@ -168,15 +168,15 @@ String _getAchievementName(BuildContext context, int id) {
 String _getAchievementDescription(BuildContext context, int id) {
   switch (id) {
     case 0:
-      return AppLocalizations.of(context)!.achievementDescription0;
+      return AppLocalizations.of(context).achievementDescription0;
     case 1:
-      return AppLocalizations.of(context)!.achievementDescription1;
+      return AppLocalizations.of(context).achievementDescription1;
     case 2:
-      return AppLocalizations.of(context)!.achievementDescription2;
+      return AppLocalizations.of(context).achievementDescription2;
     case 3:
-      return AppLocalizations.of(context)!.achievementDescription3;
+      return AppLocalizations.of(context).achievementDescription3;
     case 4:
-      return AppLocalizations.of(context)!.achievementDescription4;
+      return AppLocalizations.of(context).achievementDescription4;
     default:
       return "";
   }
