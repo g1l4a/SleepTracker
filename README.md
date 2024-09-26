@@ -1,10 +1,7 @@
 # Sleep Tracker App
 
 A cross-platform sleep tracking app built using Flutter. The app helps users monitor their sleep, set goals, and track progress.
-
-![App Logo](![Снимок экрана 2024-09-26 025426](https://github.com/user-attachments/assets/9709d0be-f456-42fa-8eea-ea5fd2d99605)
-e]()
-)
+(![image](https://github.com/user-attachments/assets/8ea18b16-e4dc-4f67-b6e9-cd4e21e8f616))
 
 ---
 
@@ -13,11 +10,10 @@ e]()
 
 | Achievements Screen | Home Screen | Statistics Screem | Settings Screen |
 |-------------------|-------------|---------------|---------------|
-| ![Achievemwnts Screen](path_to_onboar![Снимок экрана 2024-09-26 030232](https://github.com/user-attachments/assets/4979adf1-e64a-481a-9e9c-ff4ef82bae99)
-ding_screenshot) | ![Home Screen](![Снимок экрана 2024-09-26 030150](https://github.com/user-attachments/assets/7ef2b976-2518-4d0a-8e94-c9c1600214d6)
-to_home_screenshot) | ![SleepSession](path_to_sleep_sess![Снимок экрана 2024-09-26 030302](https://github.com/user-attachments/assets/f95aa593-3af4-4ca6-ab5d-d1b0f07901ee)
-ion_screenshot) | ![Settings Screen](![![Снимок экрана 2024-09-26 030323](https://github.com/user-attachments/assets/a9f49dc9-da98-4c0d-89f4-f47de8858062)
-]( |
+|![ach](https://github.com/user-attachments/assets/4979adf1-e64a-481a-9e9c-ff4ef82bae99)
+|![home](https://github.com/user-attachments/assets/7ef2b976-2518-4d0a-8e94-c9c1600214d6)
+|![SleepSession](https://github.com/user-attachments/assets/f95aa593-3af4-4ca6-ab5d-d1b0f07901ee)
+| ![Settings Screen](https://github.com/user-attachments/assets/a9f49dc9-da98-4c0d-89f4-f47de8858062)|
 
 GIF of Onboarding Screen:
 
