@@ -20,6 +20,12 @@ class SessionSummaryNotifier extends StateNotifier<SessionSummary> {
     loadFromPreferences();
   }
 
+  void setDuration(Duration duration)
+  {
+    state = state.copyWith(duration: duration);
+    _saveToPreferences();
+  }
+
   void rateSleep(int rating) {
     state = state.copyWith(sleepRating: rating);
     _saveToPreferences();

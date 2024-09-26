@@ -6,6 +6,7 @@ import 'package:sleep_tracker/achievements_screen.dart';
 import 'package:sleep_tracker/history_screen.dart';
 import 'package:sleep_tracker/settings_screen.dart';
 import 'package:sleep_tracker/sleep_session_provider.dart';
+import 'package:sleep_tracker/session_summary_screen_provider.dart';
 import 'nothern_lights.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'session_summary_screen.dart';
@@ -124,15 +125,18 @@ class HomePageContent extends ConsumerWidget {
     if (sleepSession.isSessionActive) {
       await sleepSessionNotifier.cancelSession();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).popSessionStart)),
+        SnackBar(content: Text(AppLocalizations.of(context).popSessionCancel)),
       );
     } else {
       await sleepSessionNotifier.startSession();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).popSessionCancel)),
+        SnackBar(content: Text(AppLocalizations.of(context).popSessionStart)),
       );
-      Timer(sleepSession.getRemainingTime(), () {
+      Timer(sleepSession.getRemainingTime(), () async {
           analyse(ref);
+          ref.read(sleepSessionProvider.notifier).cancelSession();
+          await ref.read(sessionSummaryProvider.notifier).loadFromPreferences();
+          ref.read(sessionSummaryProvider.notifier).setDuration(sleepSession.getFullTime());
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SessionSummaryScreen()),
@@ -194,23 +198,23 @@ class HomePageContent extends ConsumerWidget {
                         ),
                         child: Center(
                           child: Text(
-                              sleepSession.isSessionActive ? AppLocalizations.of(context).btSessionCancel : AppLocalizations.of(context).btSessionStart,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Montserrat',
-                                shadows: [
-                                  Shadow(
-                                    blurRadius: 8.0,
-                                    color: Colors.white,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                        ),
-                      )
+                            sleepSession.isSessionActive ? AppLocalizations.of(context).btSessionCancel : AppLocalizations.of(context).btSessionStart,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 8.0,
+                                  color: Colors.white,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       );
                     },
                   ),

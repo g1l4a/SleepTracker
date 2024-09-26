@@ -12,7 +12,7 @@ class SleepSession {
   bool vibrationEnabled;
   bool soundEnabled;
   bool isSessionActive;
-  Timer? _timer;
+  Timer? timer;
 
   SleepSession({
     this.startTime,
@@ -20,6 +20,7 @@ class SleepSession {
     this.vibrationEnabled = false,
     this.soundEnabled = true,
     this.isSessionActive = false,
+    this.timer
   });
 
    SleepSession copyWith({
@@ -35,6 +36,7 @@ class SleepSession {
       vibrationEnabled: vibrationEnabled ?? this.vibrationEnabled,
       soundEnabled: soundEnabled ?? this.soundEnabled,
       isSessionActive: isSessionActive ?? this.isSessionActive,
+      timer: timer
     );
   }
 
@@ -97,33 +99,41 @@ class SleepSession {
   }
 
   Duration getRemainingTime() {
-  final now = TimeOfDay.now();
-  
-  int nowInMinutes = now.hour * 60 + now.minute;
-  int startInMinutes = (startTime?.hour ?? now.hour) * 60 + (startTime?.minute ?? now.minute);
-  int endInMinutes = (endTime?.hour ?? now.hour) * 60 + (endTime?.minute ?? now.minute);
-  
-  if (endInMinutes <= startInMinutes) {
-    endInMinutes += 24 * 60; 
+    final now = TimeOfDay.now();
+    
+    int nowInMinutes = now.hour * 60 + now.minute;
+    int startInMinutes = (startTime?.hour ?? now.hour) * 60 + (startTime?.minute ?? now.minute);
+    int endInMinutes = (endTime?.hour ?? now.hour) * 60 + (endTime?.minute ?? now.minute);
+    
+    if (endInMinutes <= startInMinutes) {
+      endInMinutes += 24 * 60; 
+    }
+
+    if (nowInMinutes >= startInMinutes && nowInMinutes < endInMinutes) {
+      return Duration(minutes: endInMinutes - nowInMinutes);
+    }
+    
+    return Duration.zero; 
   }
 
-  if (nowInMinutes >= startInMinutes && nowInMinutes < endInMinutes) {
-    return Duration(minutes: endInMinutes - nowInMinutes);
+  Duration getFullTime() {
+    final now = TimeOfDay.now();
+    int startInMinutes = (startTime?.hour ?? now.hour) * 60 + (startTime?.minute ?? now.minute);
+    int endInMinutes = (endTime?.hour ?? now.hour) * 60 + (endTime?.minute ?? now.minute);
+    
+    return Duration(minutes: endInMinutes - startInMinutes);
   }
-  
-  return Duration.zero; 
-}
 
 
   void startTimer(Function onUpdate) {
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       onUpdate();
     });
   }
 
   void stopTimer() {
-    _timer?.cancel();
-    _timer = null;
+    timer?.cancel();
+    timer = null;
   }
   
   Future<void> _saveToPreferences() async {
