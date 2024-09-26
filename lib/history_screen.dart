@@ -8,6 +8,7 @@ import 'package:sleep_tracker/sleep_session.dart';
 import 'nothern_lights.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert'; // JSON
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HistoryScreen extends ConsumerStatefulWidget {
   const HistoryScreen({super.key});
@@ -99,12 +100,12 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
   Widget _buildCommonSettingsWidget() {
     String commonVibration = commonSettings['vibrationEnabled'] != null &&
             commonSettings['vibrationEnabled']! > (sessionHistory.length / 2)
-        ? 'Enabled'
-        : 'Disabled';
+        ? AppLocalizations.of(context)!.enabled
+        : AppLocalizations.of(context)!.disabled;
     String commonSound = commonSettings['soundEnabled'] != null &&
             commonSettings['soundEnabled']! > (sessionHistory.length / 2)
-        ? 'Enabled'
-        : 'Disabled';
+        ? AppLocalizations.of(context)!.enabled
+        : AppLocalizations.of(context)!.disabled;
 
     return Card(
       color: Colors.white.withOpacity(0.8),
@@ -113,11 +114,11 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Most Common Settings",
+            Text(AppLocalizations.of(context)!.mostCommonSettings,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
-            Text("Vibration: $commonVibration"),
-            Text("Sound: $commonSound"),
+            SizedBox(height: 10),
+            Text(AppLocalizations.of(context)!.vibration + ": $commonVibration"),
+            Text(AppLocalizations.of(context)!.sound + ": $commonSound"),
           ],
         ),
       ),
@@ -132,12 +133,12 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
         return Card(
           color: Colors.white.withOpacity(0.8),
           child: ListTile(
-            title: Text("Session ${index + 1}"),
+            title: Text(AppLocalizations.of(context)!.session + "${index + 1}"),
             subtitle: Text(
-              "Start: ${session.startTime!.hour}:${session.startTime!.minute}\n"
-              "End: ${session.endTime!.hour}:${session.endTime!.minute}\n"
-              "Vibration: ${session.vibrationEnabled ? 'Enabled' : 'Disabled'}\n"
-              "Sound: ${session.soundEnabled ? 'Enabled' : 'Disabled'}",
+              AppLocalizations.of(context)!.start + ": ${session.startTime!.hour}:${session.startTime!.minute}\n" +
+              AppLocalizations.of(context)!.end + ": ${session.endTime!.hour}:${session.endTime!.minute}\n" +
+              AppLocalizations.of(context)!.vibration + ": ${session.vibrationEnabled ? AppLocalizations.of(context)!.enabled : AppLocalizations.of(context)!.disabled}\n" +
+              AppLocalizations.of(context)!.sound + ": ${session.soundEnabled ? AppLocalizations.of(context)!.enabled : AppLocalizations.of(context)!.disabled}",
             ),
           ),
         );

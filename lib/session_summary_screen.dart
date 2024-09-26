@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'session_summary_screen_provider.dart';
 import 'nothern_lights.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SessionSummaryScreen extends ConsumerWidget {
   const SessionSummaryScreen({super.key});
@@ -31,20 +32,20 @@ class SessionSummaryScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Session Summary',
+                Text(
+                  AppLocalizations.of(context)!.sessionSummary,
                   style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
                 
                 Text(
-                  'You slept for ${sessionSummary.duration.inHours} hours and ${sessionSummary.duration.inMinutes % 60} minutes.',
+                  AppLocalizations.of(context)!.youSleptFor + "${sessionSummary.duration.inHours}" + AppLocalizations.of(context)!.hoursAnd + "${sessionSummary.duration.inMinutes % 60}" + AppLocalizations.of(context)!.minutes,
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 const SizedBox(height: 30),
 
-                const Text(
-                  'How was your sleep?',
+                Text(
+                  AppLocalizations.of(context)!.howWasYourSleep,
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 const SizedBox(height: 20),
@@ -70,7 +71,7 @@ class SessionSummaryScreen extends ConsumerWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Back to Home'),
+                  child: Text(AppLocalizations.of(context)!.backToHome),
                 ),
               ],
             ),
