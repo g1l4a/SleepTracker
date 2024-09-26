@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mockito/mockito.dart';
@@ -6,6 +7,7 @@ import 'package:sleep_tracker/settings_screen_shared_preferences.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
 
   test('saves and loads boolean setting', () async {
     await SettingsSharedPreferences.saveSetting('testBool', true);

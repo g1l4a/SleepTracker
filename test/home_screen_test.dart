@@ -2,13 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sleep_tracker/home_screen.dart';
+import 'package:sleep_tracker/settings_screen_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
+final settingsProviderMock = StateNotifierProvider<SettingsNotifier, Settings>((ref) {
+  return SettingsNotifier(); // Adjust as necessary
+});
 
 Widget createHomeScreen() {
-  return const ProviderScope(
+  return ProviderScope(
     child: MaterialApp(
-      home: HomeScreen(),
-    ),
-  );
+          title: 'Project',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          locale: const Locale('en'), // Set a default locale
+          supportedLocales: AppLocalizations.supportedLocales,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const HomeScreen(),
+        ),
+      );
 }
 
 void main() {
