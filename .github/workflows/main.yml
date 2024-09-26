@@ -29,3 +29,4 @@ jobs:
 
       - name: Build Web App
         run: flutter build web --release
+        
