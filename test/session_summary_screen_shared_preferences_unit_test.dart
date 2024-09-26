@@ -11,7 +11,7 @@ void main() {
     });
 
     test('saveSessionSummary saves data', () async {
-      await SessionSummarySharedPreferences.saveSessionSummary(Duration(hours: 2), 4);
+      await SessionSummarySharedPreferences.saveSessionSummary(const Duration(hours: 2), 4);
 
       final prefs = await SharedPreferences.getInstance();
       expect(prefs.getInt('sessionDuration'), 120);
@@ -25,7 +25,7 @@ void main() {
       });
 
       final result = await SessionSummarySharedPreferences.loadSessionSummary();
-      expect(result['duration'], Duration(minutes: 90));
+      expect(result['duration'], const Duration(minutes: 90));
       expect(result['sleepRating'], 3);
     });
 

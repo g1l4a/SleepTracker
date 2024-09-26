@@ -113,9 +113,9 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Most Common Settings",
+            const Text("Most Common Settings",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text("Vibration: $commonVibration"),
             Text("Sound: $commonSound"),
           ],

@@ -35,14 +35,17 @@ class Settings {
 }
 
 class SettingsNotifier extends StateNotifier<Settings> {
-  SettingsNotifier() : super(Settings()) {
+  SettingsNotifier() : super(Settings(isDarkMode: true)) {
     loadSettings();
   }
+
+  bool get isDarkMode => state.isDarkMode;
 
   void toggleTheme(bool isDarkMode) {
     state = state.copyWith(isDarkMode: isDarkMode);
     saveSettings();
   }
+
 
   void toggleVibration(bool isEnabled) {
     state = state.copyWith(vibrationEnabled: isEnabled);

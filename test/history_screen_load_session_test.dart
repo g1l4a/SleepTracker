@@ -16,7 +16,7 @@ void main() {
   });
 
   Widget createWidgetUnderTest() {
-    return ProviderScope(
+    return const ProviderScope(
       child: MaterialApp(
         home: HistoryScreen(),
       ),

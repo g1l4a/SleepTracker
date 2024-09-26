@@ -8,6 +8,7 @@ import 'package:sleep_tracker/settings_screen.dart';
 import 'package:sleep_tracker/sleep_session_provider.dart';
 import 'nothern_lights.dart';
 import 'session_summary_screen.dart';
+import 'settings_screen_provider.dart';
 
 
 class ButtonHoverNotifier extends StateNotifier<bool> {
@@ -21,6 +22,7 @@ class ButtonHoverNotifier extends StateNotifier<bool> {
 final buttonHoverProvider = StateNotifierProvider<ButtonHoverNotifier, bool>((ref) {
   return ButtonHoverNotifier();
 });
+
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -47,6 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+  final isDarkMode = ref.watch(settingsProvider).isDarkMode;
     return Scaffold(
       body: Stack(
         children: [
@@ -61,7 +64,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(canvasColor: isDarkMode ? Color.fromARGB(255, 43, 4, 134) : Colors.white),
+      child: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -81,9 +86,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        fixedColor: const Color.fromARGB(255, 56, 17, 107),
+        fixedColor: const Color.fromARGB(255, 207, 175, 248),
         onTap: _onItemTapped,
       ),
+      )
     );
   }
 }

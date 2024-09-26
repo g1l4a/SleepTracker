@@ -23,8 +23,8 @@ void main() {
   });
 
   test('Setting start time should update state', () async {
-    sleepSessionNotifier.setStartTime(TimeOfDay(hour: 22, minute: 30));
-    expect(sleepSessionNotifier.state.startTime, TimeOfDay(hour: 22, minute: 30));
+    sleepSessionNotifier.setStartTime(const TimeOfDay(hour: 22, minute: 30));
+    expect(sleepSessionNotifier.state.startTime, const TimeOfDay(hour: 22, minute: 30));
   });
 
   test('Cancel session should deactivate the session', () async {
