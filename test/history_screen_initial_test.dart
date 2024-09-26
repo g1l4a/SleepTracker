@@ -5,7 +5,7 @@ import 'package:sleep_tracker/history_screen.dart';
 
 void main() {
   Widget createWidgetUnderTest() {
-    return ProviderScope(
+    return const ProviderScope(
       child: MaterialApp(
         home: HistoryScreen(),
       ),

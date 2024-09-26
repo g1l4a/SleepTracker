@@ -116,7 +116,7 @@ class SleepSession {
 
 
   void startTimer(Function onUpdate) {
-    _timer = Timer.periodic(Duration(seconds: 1), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       onUpdate();
     });
   }
